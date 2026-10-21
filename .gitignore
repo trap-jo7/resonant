@@ -1,0 +1,12 @@
+.env
+node_modules/
+.next/
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+data/audio/
+data/*.local.json
+
+.env.local
+.env.*.local

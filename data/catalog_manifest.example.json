@@ -1,0 +1,17 @@
+[
+  {
+    "source": "artist",
+    "source_id": "example-001",
+    "title": "Example Track (replace me)",
+    "artist": "Example Artist",
+    "album": "Example Album",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "\"Example Track\" by Example Artist, licensed CC BY 4.0",
+    "source_url": "https://example.com/where-you-verified-this",
+    "permission_evidence": "Link or note showing the artist/license permits analysis, playback and storage",
+    "permissions": { "analysis": true, "playback": true, "storage": true },
+    "recording_group": "example-001",
+    "file": "data/audio/example-001.mp3"
+  }
+]

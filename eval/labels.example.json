@@ -1,0 +1,5 @@
+[
+  {"split": "tune", "mode": "vibe",
+   "query": {"track_id": "<uuid>", "start_s": 12.0, "end_s": 24.0},
+   "grades": {"<candidate-track-uuid>": 3, "<another-track-uuid>": 0}}
+]

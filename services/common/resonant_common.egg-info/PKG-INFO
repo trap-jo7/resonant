@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: resonant-common
+Version: 0.1.0
+Requires-Python: >=3.10
+Requires-Dist: numpy
+Requires-Dist: psycopg[binary,pool]>=3.1
+Requires-Dist: pgvector>=0.3

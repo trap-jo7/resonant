@@ -1,0 +1,10 @@
+# Cost / safety audit (from the "vibe-coded app" checklist)
+
+| Item | Found | Changed | You still need to |
+|---|---|---|---|
+| 1. Hosting ceiling | No host config existed yet. Large assets are audio only, served from private object storage. No third-party scripts (Inter is self-hosted by `next/font` at build). | Per-IP Redis rate limits on every API route (general 60/min; uploads 10/h and analysis 40/h, fail-closed). CPU/memory limits and `--limit-concurrency` in compose. Signed-URL audio (not proxied through the API). | Put a CDN/WAF (e.g. Cloudflare) in front of the web app for site-level limits; set a hard spend cap or billing alert on the frontend host, object storage egress and your backend host (dashboard settings; a budget *alert* is not a cap). |
+| 2. Accessibility | Custom controls only. | Real buttons/inputs, visible `:focus-visible`, labelled controls, `aria-pressed`/`aria-live`, skip link, keyboard timestamp nudging, reduced-motion support, `eslint-plugin-jsx-a11y` strict. | Run `npm run lint`, add an axe pass in Playwright, and test with VoiceOver. WaveSurfer region handles are pointer-only; typed timestamps are the keyboard path. |
+| 3. Database / secrets | Postgres (not Supabase). | RLS enabled on all private tables, owner-scoped policies, API uses a non-owner role, identity comes only from the session cookie. No secrets in `NEXT_PUBLIC_*`; `.env` git-ignored. | Change the dev passwords; use managed secrets in production; grep git history before publishing. |
+| 4. Messaging | The app sends no SMS or email. | Nothing. | Add consent + unsubscribe handling before ever adding messaging. |
+| 5. Compute | Celery tasks, no self-enqueueing, no webhooks/crawlers. | Task soft/hard time limits, `max_retries=1`, bounded Redis queue memory, worker concurrency 1, timeouts on S3/MusicBrainz/ffmpeg calls, ffmpeg CPU limits. | Set a hard budget cap in your cloud console; keep worker replica count capped. |
+| Extras | No accounts. | Uniform error messages; no email-existence leaks. Cookie sessions are anonymous and expire server-side data via retention. | If you add sign-in later, invalidate sessions server-side on sign-out. |
